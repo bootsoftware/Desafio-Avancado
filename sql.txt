@@ -1,0 +1,34 @@
+
+CREATE TABLE `cities` (
+  `id_city` int NOT NULL,
+  `description` varchar(200) NOT NULL,
+  PRIMARY KEY (`id_city`)
+) 
+
+
+CREATE TABLE `states` (
+  `id_states` int NOT NULL AUTO_INCREMENT,
+  `description` varchar(200) NOT NULL,
+  `initials` varchar(2) NOT NULL,
+  PRIMARY KEY (`id_states`)
+
+
+
+
+CREATE TABLE `curso`.`city_state` (
+  `id_city_state` INT NOT NULL,
+  `id_city` INT NOT NULL,
+  `id_state` INT NOT NULL,
+  PRIMARY KEY (`id_city_state`),
+  INDEX `id_city_idx` (`id_city` ASC) VISIBLE,
+  INDEX `id_state_idx` (`id_state` ASC) VISIBLE,
+  CONSTRAINT `id_city`
+    FOREIGN KEY (`id_city`)
+    REFERENCES `curso`.`cities` (`id_city`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `id_state`
+    FOREIGN KEY (`id_state`)
+    REFERENCES `curso`.`states` (`id_states`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
