@@ -1,4 +1,4 @@
-import 'package:desafio_dart_avancado/components/exception_custom_dio.dart';
+import 'package:desafio_dart_avancado/components/exceptions/exception_custom_dio.dart';
 import 'package:desafio_dart_avancado/model/cidade_model.dart';
 import 'package:desafio_dart_avancado/model/estado_model.dart';
 import 'package:desafio_dart_avancado/repository/ibge_Repository.dart';
@@ -66,5 +66,6 @@ class IbgeService {
       print('API ---- ERRO ---- ${e.toString()} ---- ERRO ---- ');
       print(s);
     }
-  }
+  }  
+  
 }
