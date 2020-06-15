@@ -1,22 +1,22 @@
-import 'package:desafio_dart_avancado/exceptions/exception_custom_mysql.dart';
+import 'package:desafio_dart_avancado/components/exceptions/exception_custom_mysql.dart';
 import 'package:desafio_dart_avancado/model/cidade_model.dart';
 import 'package:desafio_dart_avancado/model/estado_model.dart';
+import 'package:desafio_dart_avancado/repository/mysql_repository.dart';
 import 'package:mysql1/mysql1.dart';
 
-import 'repository_mysql.dart';
-
-class ServiceMysql {
-  final RepositoryMysql _repositoryMysql = RepositoryMysql();
+class MysqlService {
+  final _mysqlRepository = MysqlRepository();
 
   Future<void> saveState(List<Estado> estados) async {
     if (estados != null) {
-      estados.forEach((estado) async {
+      //////NUNCA USAR ASSIM     estados.forEach((estado) async { //////NUNCA USAR ASSIM
+      await Future.forEach(estados, (estado) async {
         var id = estado.id;
         var descricao = estado.descricao;
         var sigla = estado.sigla;
         try {
           print(
-            await _repositoryMysql.saveState(
+            await _mysqlRepository.saveState(
               id.toString(),
               descricao,
               sigla,
@@ -34,26 +34,21 @@ class ServiceMysql {
     }
   }
 
-  Future<void> saveCity(List<Cidade> cidades) async {
+  Future<void> saveCity(List<Cidade> cidades, int estadoId) async {
     if (cidades != null) {
-      cidades.forEach((cidade) async {
+      //////NUNCA USAR ASSIM // cidades.forEach((cidade) async { //////NUNCA USAR ASSIM
+      await Future.forEach(cidades, (cidade) async {
         var id = cidade.id;
         var descricao = cidade.descricao;
-        var uf = cidade.estado.id;
+        var uf = estadoId;
         try {
           print(
-            await _repositoryMysql.saveCity(
+            await _mysqlRepository.saveCity(
               id.toString(),
               descricao,
               uf.toString(),
             ),
           );
-          // print(
-          //   await _repositoryMysql.saveCityState(
-          //     id.toString(),
-          //     uf.toString(),
-          //   ),
-          // );
         } on MySqlException catch (e) {
           var errr = MysqlError(e).check(); // ver se tem como melhorar essa chamada
           print('SQL ---- ERRO ---- $errr ---- ERRO ---- ');

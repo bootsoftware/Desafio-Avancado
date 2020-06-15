@@ -1,13 +1,37 @@
-import 'package:desafio_dart_avancado/model/estado_model.dart';
+import 'dart:convert';
+
+import 'package:meta/meta.dart';
+
 
 class Cidade {
   int id;
   String descricao;
-  Estado estado;
+//  Estado estado;
+  Cidade({
+    @required this.id,
+    @required this.descricao,
+   // @required this.estado,
+  });
 
-  Cidade({this.id, this.descricao}) {
-    id = id ?? 0;
-    descricao = descricao ?? '';
-    estado = estado ?? Estado();
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'descricao': descricao,
+  //    'estado': estado?.toMap(),
+    };
   }
+
+  static Cidade fromMap(Map<String, dynamic> map) {
+    if (map == null) return null;
+
+    return Cidade(
+      id: map['id'] ?? 0,
+      descricao: map['nome'] ?? '',
+ //     estado: Estado.fromMap(map['microrregiao']['mesorregiao']['UF']) ?? Estado(id: 0, descricao: '', sigla: ''),
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  static Cidade fromJson(String source) => fromMap(json.decode(source));
 }

@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-class RepositoryServiceIbge {
+class IbgeRepository {
   Future<Response> getState([int uf = 0]) async {
     var url = 'https://servicodados.ibge.gov.br/api/v1/localidades/estados';
     var dio = Dio();

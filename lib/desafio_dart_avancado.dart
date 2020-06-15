@@ -1,13 +1,7 @@
-import 'api_ibge/service_ibge.dart';
-import 'mysql/service_mysql.dart';
+import 'package:desafio_dart_avancado/controller/dsesafio_dart_avancado_controller.dart';
 
 Future<void> run() async {
-  final serviceMysql = ServiceMysql();
-  final serviceIbge = ServiceIbge();
+  final _controller = Controller();
 
-  // var estados = await serviceIbge.getEstado();
-  //   await serviceMysql.saveState(estados);
-
-  var cidades = await serviceIbge.getCities();
-  await serviceMysql.saveCity(cidades);
+  await _controller.getCities();
 }

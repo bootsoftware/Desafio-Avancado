@@ -1,34 +1,37 @@
-
+drop database curso;
+create database curso;
+use curso;
 CREATE TABLE `cities` (
-  `id_city` int NOT NULL,
+ `id_city`  int NOT NULL AUTO_INCREMENT,
+  `ibge` int NOT NULL,
   `description` varchar(200) NOT NULL,
   PRIMARY KEY (`id_city`)
-) 
+);
 
 
 CREATE TABLE `states` (
   `id_states` int NOT NULL AUTO_INCREMENT,
   `description` varchar(200) NOT NULL,
   `initials` varchar(2) NOT NULL,
-  PRIMARY KEY (`id_states`)
+  PRIMARY KEY (`id_states`));
 
 
 
 
-CREATE TABLE `curso`.`city_state` (
-  `id_city_state` INT NOT NULL,
-  `id_city` INT NOT NULL,
-  `id_state` INT NOT NULL,
-  PRIMARY KEY (`id_city_state`),
-  INDEX `id_city_idx` (`id_city` ASC) VISIBLE,
-  INDEX `id_state_idx` (`id_state` ASC) VISIBLE,
-  CONSTRAINT `id_city`
-    FOREIGN KEY (`id_city`)
-    REFERENCES `curso`.`cities` (`id_city`)
+CREATE TABLE `curso`.`cities_states` (
+  `id_states_cities` INT NOT NULL AUTO_INCREMENT,
+  `id_cities` INT NOT NULL,
+  `id_states` INT NOT NULL,
+  PRIMARY KEY (`id_states_cities`),
+  INDEX `id_states_idx` (`id_states` ASC) VISIBLE,
+  INDEX `id_cities_idx` (`id_cities` ASC) VISIBLE,
+  CONSTRAINT `id_states`
+    FOREIGN KEY (`id_states`)
+    REFERENCES `curso`.`states` (`id_states`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `id_state`
-    FOREIGN KEY (`id_state`)
-    REFERENCES `curso`.`states` (`id_states`)
+  CONSTRAINT `id_cities`
+    FOREIGN KEY (`id_cities`)
+    REFERENCES `curso`.`cities` (`id_city`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
