@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
 
-class DioErro extends DioError {
+class ExceptionCustomDio extends DioError {
   // this.request,
   // this.response,
   // this.type = DioErrorType.DEFAULT,
   // this.error,
-  DioErro(
+  ExceptionCustomDio(
     DioError erro,
   ) : super(
           request: erro.request,

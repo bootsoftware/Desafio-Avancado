@@ -1,4 +1,4 @@
-import 'package:desafio_dart_avancado/components/exceptions/exception_custom_dio.dart';
+import 'package:desafio_dart_avancado/components/exception_custom_dio.dart';
 import 'package:desafio_dart_avancado/model/cidade_model.dart';
 import 'package:desafio_dart_avancado/model/estado_model.dart';
 import 'package:desafio_dart_avancado/repository/ibge_Repository.dart';
@@ -21,8 +21,8 @@ class IbgeService {
       await _mysqlService.saveState(list);
       return list;
     } on DioError catch (e) {
-      var errr = DioErro(e).check(); // ver se tem como melhorar essa chamada
-      print('API ---- ERRO ---- $errr ---- ERRO ---- ');
+      var err = ExceptionCustomDio(e).check(); // ver se tem como melhorar essa chamada
+      print('API ---- ERRO ---- $err ---- ERRO ---- ');
       return null;
     } catch (e) {
       print('API ---- ERRO ---- ${e.toString()} ---- ERRO ---- ');
@@ -58,7 +58,7 @@ class IbgeService {
     try {
       await _getCities();
     } on DioError catch (e, s) {
-      var errr = DioErro(e).check(); // ver se tem como melhorar essa chamada
+      var errr = ExceptionCustomDio(e).check(); // ver se tem como melhorar essa chamada
       print('API ---- ERRO ---- $errr ---- ERRO ---- ');
       print(s);
       return null;
